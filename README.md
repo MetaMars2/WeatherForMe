@@ -42,7 +42,7 @@ WeatherForMe/
 └── src/
     ├── index.html     # Main HTML structure
     ├── script.js      # JavaScript logic and API interaction
-    ├── styles.css     # CSS styling
+    └── styles.css     # CSS styling
 └── media/
 	└── images/
 		└── sunny_cloud_logo_text.png # Logo image

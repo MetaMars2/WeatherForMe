@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&display=swap">
+    <script src="script.js" defer></script>
+    <title>WeatherForMe</title>
+</head>
+<body>
+    <main>
+        <img src="../media/images/sunny_cloud_logo_text.png" alt="WeatherForMe Logo" class="logo-image">
+        
+        <div class="container search-container"> 
+            <div class="input-container">
+                <div class="search-wrapper">
+                    <input type="text" 
+                           id="city-input" 
+                           placeholder="Enter city name" 
+                           class="input-field"
+                           autocomplete="off"
+                           autocorrect="off"
+                           autocapitalize="off"
+                           spellcheck="false">
+                    <div id="city-dropdown" class="dropdown-menu"></div>
+                </div>
+                <button id="search-button" class="search-button">Search</button>
+            </div>
+            <p id="error-message" class="error-message"></p>
+        </div>
+
+        <div class="container-info">
+            <div id="weather-info" class="weather-info">
+                <p id="city-name" class="city-name"></p>
+                <p id="temperature" class="temperature"></p>
+                <p id="feels-like" class="feels-like"></p>
+                <p id="perception-chance" class="perception-chance"></p>
+                <p id="humidity" class="humidity"></p>
+                <p id="current-rain" class="rain-info"></p>
+                <p id="later-rain" class="rain-info"></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -233,6 +233,57 @@ main {
   animation: glowRed 1s ease-in-out;
 }
 
+.api-key-container {
+    text-align: center;
+}
+
+.api-key-container h2 {
+    margin-top: 0;
+    color: #334155;
+}
+
+.api-info {
+    margin-top: 20px;
+    text-align: left;
+    padding: 15px;
+    background-color: #F8FAFC;
+    border-radius: 8px;
+}
+
+.api-info ol {
+    padding-left: 20px;
+}
+
+.api-info li {
+    margin-bottom: 8px;
+}
+
+.api-key-options {
+    margin-top: 15px;
+    font-size: 0.8rem;
+    text-align: right;
+    color: #64748B;
+}
+
+.api-key-options a {
+    color: #4338CA;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.api-key-container .input-field {
+  margin-bottom: 12px;
+}
+
+a {
+    color: #4338CA;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 480px) {
   .logo-image {
       width: 150px;

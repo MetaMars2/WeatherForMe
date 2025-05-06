@@ -12,33 +12,56 @@
     <main>
         <img src="../media/images/sunny_cloud_logo_text.png" alt="WeatherForMe Logo" class="logo-image">
         
-        <div class="container search-container"> 
+        <!-- API Key Input Form -->
+        <div id="api-key-container" class="container api-key-container">
+            <h2>Enter Your WeatherAPI Key</h2>
+            <p>To use this application, you need a free API key from <a href="https://www.weatherapi.com/" target="_blank">WeatherAPI.com</a></p>
             <div class="input-container">
-                <div class="search-wrapper">
-                    <input type="text" 
-                           id="city-input" 
-                           placeholder="Enter city name" 
-                           class="input-field"
-                           autocomplete="off"
-                           autocorrect="off"
-                           autocapitalize="off"
-                           spellcheck="false">
-                    <div id="city-dropdown" class="dropdown-menu"></div>
-                </div>
-                <button id="search-button" class="search-button">Search</button>
+                <input type="text" id="api-key-input" placeholder="Enter your API key" class="input-field">
+                <button id="api-key-submit" class="search-button">Submit</button>
             </div>
-            <p id="error-message" class="error-message"></p>
+            <p id="api-key-error" class="error-message"></p>
+            <div class="api-info">
+                <p>Need an API key?</p>
+                <ol>
+                    <li>Sign up at <a href="https://www.weatherapi.com/signup.aspx" target="_blank">WeatherAPI.com</a></li>
+                    <li>Copy your API key from your dashboard</li>
+                    <li>Paste it in the field above</li>
+                </ol>
+            </div>
         </div>
 
-        <div class="container-info">
-            <div id="weather-info" class="weather-info">
-                <p id="city-name" class="city-name"></p>
-                <p id="temperature" class="temperature"></p>
-                <p id="feels-like" class="feels-like"></p>
-                <p id="perception-chance" class="perception-chance"></p>
-                <p id="humidity" class="humidity"></p>
-                <p id="current-rain" class="rain-info"></p>
-                <p id="later-rain" class="rain-info"></p>
+        <!-- Weather App UI (initially hidden) -->
+        <div id="weather-app-ui" style="display:none; width:100%;">
+            <div class="container search-container"> 
+                <div class="input-container">
+                    <div class="search-wrapper">
+                        <input type="text" 
+                               id="city-input" 
+                               placeholder="Enter city name" 
+                               class="input-field"
+                               autocomplete="off"
+                               autocorrect="off"
+                               autocapitalize="off"
+                               spellcheck="false">
+                        <div id="city-dropdown" class="dropdown-menu"></div>
+                    </div>
+                    <button id="search-button" class="search-button">Search</button>
+                </div>
+                <p id="error-message" class="error-message"></p>
+                <p class="api-key-options">Using your API key. <a href="#" id="reset-api-key">Change key</a></p>
+            </div>
+
+            <div class="container-info">
+                <div id="weather-info" class="weather-info">
+                    <p id="city-name" class="city-name"></p>
+                    <p id="temperature" class="temperature"></p>
+                    <p id="feels-like" class="feels-like"></p>
+                    <p id="perception-chance" class="perception-chance"></p>
+                    <p id="humidity" class="humidity"></p>
+                    <p id="current-rain" class="rain-info"></p>
+                    <p id="later-rain" class="rain-info"></p>
+                </div>
             </div>
         </div>
     </main>

@@ -1,6 +1,17 @@
-const API_KEY = ""; // Replace with your key
+// API key is now stored in localStorage instead of being hardcoded
+let API_KEY = "";
 const API_BASE_URL = "https://api.weatherapi.com/v1";
+const API_KEY_STORAGE_NAME = "weatherForMe_apiKey";
 
+// DOM elements for API key input
+const apiKeyContainer = document.getElementById("api-key-container");
+const apiKeyInput = document.getElementById("api-key-input");
+const apiKeySubmit = document.getElementById("api-key-submit");
+const apiKeyError = document.getElementById("api-key-error");
+const weatherAppUI = document.getElementById("weather-app-ui");
+const resetApiKey = document.getElementById("reset-api-key");
+
+// Weather app DOM elements
 const cityInput = document.getElementById("city-input");
 const cityDropdown = document.getElementById("city-dropdown");
 const searchButton = document.getElementById("search-button");
@@ -24,6 +35,60 @@ const GLOW_DURATION = 1000;
 
 let typingTimer;
 let errorTimer;
+
+// API Key handling functions
+function saveApiKey(key) {
+    localStorage.setItem(API_KEY_STORAGE_NAME, key);
+    API_KEY = key;
+}
+
+function getStoredApiKey() {
+    return localStorage.getItem(API_KEY_STORAGE_NAME);
+}
+
+function clearApiKey() {
+    localStorage.removeItem(API_KEY_STORAGE_NAME);
+    API_KEY = "";
+}
+
+function showApiKeyError(message) {
+    apiKeyError.textContent = message;
+    apiKeyError.classList.add("show");
+    setTimeout(() => {
+        apiKeyError.classList.remove("show");
+    }, 5000);
+}
+
+async function validateApiKey(key) {
+    try {
+        // Test API key with a simple request
+        const testUrl = `${API_BASE_URL}/current.json?key=${key}&q=London`;
+        const response = await fetch(testUrl);
+        
+        if (!response.ok) {
+            if (response.status === 401) {
+                throw new Error("Invalid API key. Please check and try again.");
+            }
+            throw new Error(`API Error: ${response.status}`);
+        }
+        
+        // If we get here, the key is valid
+        return true;
+    } catch (error) {
+        showApiKeyError(error.message);
+        return false;
+    }
+}
+
+function showWeatherApp() {
+    apiKeyContainer.style.display = "none";
+    weatherAppUI.style.display = "block";
+}
+
+function showApiKeyForm() {
+    apiKeyContainer.style.display = "block";
+    weatherAppUI.style.display = "none";
+}
 
 function displayError(message) {
     clearTimeout(errorTimer);
@@ -205,10 +270,36 @@ document.addEventListener("click", (e) => {
     }
 });
 
-function init() {
-    clearUIText();
-    clearError();
-    weatherInfoContainer.classList.remove('show');
-}
+// Add event listener for API key submission
+apiKeySubmit.addEventListener("click", async () => {
+    const key = apiKeyInput.value.trim();
+    if (!key) {
+        showApiKeyError("Please enter an API key");
+        return;
+    }
+    
+    const isValid = await validateApiKey(key);
+    if (isValid) {
+        saveApiKey(key);
+        showWeatherApp();
+    }
+});
 
-document.addEventListener("DOMContentLoaded", init);
+// Add event listener for reset API key
+resetApiKey.addEventListener("click", (e) => {
+    e.preventDefault();
+    clearApiKey();
+    apiKeyInput.value = "";
+    showApiKeyForm();
+});
+
+// Initialize app when page loads
+document.addEventListener("DOMContentLoaded", () => {
+    const storedApiKey = getStoredApiKey();
+    if (storedApiKey) {
+        API_KEY = storedApiKey;
+        showWeatherApp();
+    } else {
+        showApiKeyForm();
+    }
+});
